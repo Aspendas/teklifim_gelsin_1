@@ -26,7 +26,7 @@ class Loan {
     if (json['active_offers'] != null) {
       activeOffers = <ActiveOffers>[];
       json['active_offers'].forEach((v) {
-        activeOffers!.add(new ActiveOffers.fromJson(v));
+        activeOffers!.add(ActiveOffers.fromJson(v));
       });
     }
     amount = json['amount'];
@@ -38,20 +38,20 @@ class Loan {
     if (json['passive_offers'] != null) {
       passiveOffers = <PassiveOffers>[];
       json['passive_offers'].forEach((v) {
-        passiveOffers!.add(new PassiveOffers.fromJson(v));
+        passiveOffers!.add(PassiveOffers.fromJson(v));
       });
     }
     if (json['sponsored_offers'] != null) {
       sponsoredOffers = <SponsoredOffers>[];
       json['sponsored_offers'].forEach((v) {
-        sponsoredOffers!.add(new SponsoredOffers.fromJson(v));
+        sponsoredOffers!.add(SponsoredOffers.fromJson(v));
       });
     }
     type = json['type'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     if (this.activeOffers != null) {
       data['active_offers'] =
           this.activeOffers!.map((v) => v.toJson()).toList();
