@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-// Import the model classes
 import '/model/loan.dart';
 
 class LoanViewModel extends ChangeNotifier {
