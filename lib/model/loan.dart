@@ -1,7 +1,7 @@
 class Loan {
   List<ActiveOffers>? activeOffers;
   int? amount;
-  Null? carCondition;
+  // Null? carCondition;
   int? clientId;
   String? createdAt;
   String? id;
@@ -13,7 +13,7 @@ class Loan {
   Loan(
       {this.activeOffers,
       this.amount,
-      this.carCondition,
+      // this.carCondition,
       this.clientId,
       this.createdAt,
       this.id,
@@ -30,7 +30,7 @@ class Loan {
       });
     }
     amount = json['amount'];
-    carCondition = json['carCondition'];
+    // carCondition = json['carCondition'];
     clientId = json['client_id'];
     createdAt = json['created_at'];
     id = json['id'];
@@ -51,32 +51,30 @@ class Loan {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.activeOffers != null) {
-      data['active_offers'] =
-          this.activeOffers!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (activeOffers != null) {
+      data['active_offers'] = activeOffers!.map((v) => v.toJson()).toList();
     }
-    data['amount'] = this.amount;
-    data['carCondition'] = this.carCondition;
-    data['client_id'] = this.clientId;
-    data['created_at'] = this.createdAt;
-    data['id'] = this.id;
-    data['maturity'] = this.maturity;
-    if (this.passiveOffers != null) {
-      data['passive_offers'] =
-          this.passiveOffers!.map((v) => v.toJson()).toList();
+    data['amount'] = amount;
+    // data['carCondition'] = carCondition;
+    data['client_id'] = clientId;
+    data['created_at'] = createdAt;
+    data['id'] = id;
+    data['maturity'] = maturity;
+    if (passiveOffers != null) {
+      data['passive_offers'] = passiveOffers!.map((v) => v.toJson()).toList();
     }
-    if (this.sponsoredOffers != null) {
+    if (sponsoredOffers != null) {
       data['sponsored_offers'] =
-          this.sponsoredOffers!.map((v) => v.toJson()).toList();
+          sponsoredOffers!.map((v) => v.toJson()).toList();
     }
-    data['type'] = this.type;
+    data['type'] = type;
     return data;
   }
 
   @override
   String toString() {
-    return 'Loan{activeOffers: $activeOffers, amount: $amount, carCondition: $carCondition, clientId: $clientId, createdAt: $createdAt, id: $id, maturity: $maturity, passiveOffers: $passiveOffers, sponsoredOffers: $sponsoredOffers, type: $type}';
+    return 'Loan{activeOffers: $activeOffers, amount: $amount, clientId: $clientId, createdAt: $createdAt, id: $id, maturity: $maturity, passiveOffers: $passiveOffers, sponsoredOffers: $sponsoredOffers, type: $type}';
   }
 }
 
@@ -118,38 +116,38 @@ class ActiveOffers {
   }
 
   ActiveOffers.fromJson(Map<String, dynamic> json) {
-    annualRate = json['annual_rate'];
+    annualRate = json['annual_rate'].toDouble();
     bank = json['bank'];
     bankId = json['bank_id'];
     bankType = json['bank_type'];
     detailNote = json['detail_note'];
-    expertise = json['expertise'];
+    expertise = json['expertise'].toDouble();
     footnote = json['footnote'];
-    hypothecFee = json['hypothec_fee'];
-    interestRate = json['interest_rate'];
+    hypothecFee = json['hypothec_fee'].toDouble();
+    interestRate = json['interest_rate'].toDouble();
     logoUrl = json['logo_url'];
     note = json['note'];
     productName = json['product_name'];
-    sponsoredRate = json['sponsored_rate'];
+    sponsoredRate = json['sponsored_rate'].toDouble();
     url = json['url'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['annual_rate'] = this.annualRate;
-    data['bank'] = this.bank;
-    data['bank_id'] = this.bankId;
-    data['bank_type'] = this.bankType;
-    data['detail_note'] = this.detailNote;
-    data['expertise'] = this.expertise;
-    data['footnote'] = this.footnote;
-    data['hypothec_fee'] = this.hypothecFee;
-    data['interest_rate'] = this.interestRate;
-    data['logo_url'] = this.logoUrl;
-    data['note'] = this.note;
-    data['product_name'] = this.productName;
-    data['sponsored_rate'] = this.sponsoredRate;
-    data['url'] = this.url;
+    data['annual_rate'] = annualRate;
+    data['bank'] = bank;
+    data['bank_id'] = bankId;
+    data['bank_type'] = bankType;
+    data['detail_note'] = detailNote;
+    data['expertise'] = expertise;
+    data['footnote'] = footnote;
+    data['hypothec_fee'] = hypothecFee;
+    data['interest_rate'] = interestRate;
+    data['logo_url'] = logoUrl;
+    data['note'] = note;
+    data['product_name'] = productName;
+    data['sponsored_rate'] = sponsoredRate;
+    data['url'] = url;
     return data;
   }
 }
@@ -159,13 +157,13 @@ class PassiveOffers {
   String? bank;
   int? bankId;
   String? bankType;
-  Null? detailNote;
+  String? detailNote;
   double? expertise;
-  Null? footnote;
+  String? footnote;
   double? hypothecFee;
   double? interestRate;
-  Null? logoUrl;
-  Null? note;
+  String? logoUrl;
+  String? note;
   String? productName;
   double? sponsoredRate;
   String? url;
@@ -192,38 +190,38 @@ class PassiveOffers {
   }
 
   PassiveOffers.fromJson(Map<String, dynamic> json) {
-    annualRate = json['annual_rate'];
+    annualRate = json['annual_rate'].toDouble();
     bank = json['bank'];
     bankId = json['bank_id'];
     bankType = json['bank_type'];
     detailNote = json['detail_note'];
-    expertise = json['expertise'];
+    expertise = json['expertise'].toDouble();
     footnote = json['footnote'];
-    hypothecFee = json['hypothec_fee'];
-    interestRate = json['interest_rate'];
+    hypothecFee = json['hypothec_fee'].toDouble();
+    interestRate = json['interest_rate'].toDouble();
     logoUrl = json['logo_url'];
     note = json['note'];
     productName = json['product_name'];
-    sponsoredRate = json['sponsored_rate'];
+    sponsoredRate = json['sponsored_rate'].toDouble();
     url = json['url'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['annual_rate'] = this.annualRate;
-    data['bank'] = this.bank;
-    data['bank_id'] = this.bankId;
-    data['bank_type'] = this.bankType;
-    data['detail_note'] = this.detailNote;
-    data['expertise'] = this.expertise;
-    data['footnote'] = this.footnote;
-    data['hypothec_fee'] = this.hypothecFee;
-    data['interest_rate'] = this.interestRate;
-    data['logo_url'] = this.logoUrl;
-    data['note'] = this.note;
-    data['product_name'] = this.productName;
-    data['sponsored_rate'] = this.sponsoredRate;
-    data['url'] = this.url;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['annual_rate'] = annualRate;
+    data['bank'] = bank;
+    data['bank_id'] = bankId;
+    data['bank_type'] = bankType;
+    data['detail_note'] = detailNote;
+    data['expertise'] = expertise;
+    data['footnote'] = footnote;
+    data['hypothec_fee'] = hypothecFee;
+    data['interest_rate'] = interestRate;
+    data['logo_url'] = logoUrl;
+    data['note'] = note;
+    data['product_name'] = productName;
+    data['sponsored_rate'] = sponsoredRate;
+    data['url'] = url;
     return data;
   }
 }
@@ -241,9 +239,9 @@ class SponsoredOffers {
   String? bank;
   int? bankId;
   String? endDate;
-  Null? footnote;
+  String? footnote;
   int? listType;
-  Null? logoUrl;
+  String? logoUrl;
   int? productType;
   int? sponsoredRate;
 
@@ -292,24 +290,24 @@ class SponsoredOffers {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ad_button_text'] = this.adButtonText;
-    data['ad_content'] = this.adContent;
-    data['ad_details'] = this.adDetails;
-    data['ad_display_type'] = this.adDisplayType;
-    data['ad_header'] = this.adHeader;
-    data['ad_img_link'] = this.adImgLink;
-    data['ad_name'] = this.adName;
-    data['ad_utm_link'] = this.adUtmLink;
-    data['badge_text'] = this.badgeText;
-    data['bank'] = this.bank;
-    data['bank_id'] = this.bankId;
-    data['end_date'] = this.endDate;
-    data['footnote'] = this.footnote;
-    data['list_type'] = this.listType;
-    data['logo_url'] = this.logoUrl;
-    data['product_type'] = this.productType;
-    data['sponsored_rate'] = this.sponsoredRate;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['ad_button_text'] = adButtonText;
+    data['ad_content'] = adContent;
+    data['ad_details'] = adDetails;
+    data['ad_display_type'] = adDisplayType;
+    data['ad_header'] = adHeader;
+    data['ad_img_link'] = adImgLink;
+    data['ad_name'] = adName;
+    data['ad_utm_link'] = adUtmLink;
+    data['badge_text'] = badgeText;
+    data['bank'] = bank;
+    data['bank_id'] = bankId;
+    data['end_date'] = endDate;
+    data['footnote'] = footnote;
+    data['list_type'] = listType;
+    data['logo_url'] = logoUrl;
+    data['product_type'] = productType;
+    data['sponsored_rate'] = sponsoredRate;
     return data;
   }
 }
