@@ -6,7 +6,8 @@ import 'package:teklifim_gelsin_1/widgets/offer_ad.dart';
 import 'package:teklifim_gelsin_1/widgets/sponsored_offer.dart';
 
 import '../viewmodel/loan.dart';
-import '../widgets/activeOffer.dart';
+import '../widgets/active_offer.dart';
+import '../widgets/passive_offer.dart';
 import 'search_loan.dart';
 
 class LoanList extends StatelessWidget {
@@ -161,6 +162,19 @@ class LoanList extends StatelessWidget {
               adImageUrl:
                   "https://teklifimgelsin.com/_next/image?url=https%3A%2F%2Fcdn.teklifimgelsin.com%2Fimages%2Fbanners%2Ftg-report-banner-mobile2.webp&w=640&q=75",
               adUrl: Uri.parse("https://teklifimgelsin.com/kredi-karnesi"),
+            ),
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: passiveOffers.length,
+              itemBuilder: (context, index) {
+                final offer = passiveOffers[index];
+                return PassiveOffer(
+                  bankImageUrl: getBankImage(offer.bankId ?? 0),
+                  loan: loanViewModel.loans.first,
+                  passiveOffers: offer,
+                );
+              },
             ),
           ],
         ),

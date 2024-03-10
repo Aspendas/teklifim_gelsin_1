@@ -5,26 +5,26 @@ import '../model/loan.dart';
 import '../utils/launch_page.dart';
 import '../utils/monthly_payment.dart';
 
-class ActiveOffer extends StatelessWidget {
-  const ActiveOffer({
+class PassiveOffer extends StatelessWidget {
+  const PassiveOffer({
     super.key,
     required this.bankImageUrl,
-    required this.activeOffers,
+    required this.passiveOffers,
     required this.loan,
   });
   final String bankImageUrl;
   final Loan loan;
-  final ActiveOffers activeOffers;
+  final PassiveOffers passiveOffers;
 
   @override
   Widget build(BuildContext context) {
-    double rate = activeOffers.interestRate ?? 0;
+    double rate = passiveOffers.interestRate ?? 0;
     double amount = loan.amount!.toDouble();
     double expiry = loan.maturity!.toDouble();
     double? totalInterestRate = rate * 0.013;
     String monthlyPayment =
         calculeteMonthlyPayment(amount, totalInterestRate, expiry);
-    Uri url = Uri.parse(activeOffers.url!);
+    Uri url = Uri.parse(passiveOffers.url ?? "");
     String total =
         (double.tryParse(monthlyPayment)! * expiry).toStringAsFixed(2);
 
