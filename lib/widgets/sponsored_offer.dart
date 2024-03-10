@@ -21,163 +21,266 @@ class SponsoredOffer extends StatelessWidget {
         calculeteMonthlyPayment(amount, totalInterestRate, expiry);
     Uri url = Uri.parse(sponsoredOffers.adUtmLink!);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFFffffff),
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-        border: Border.all(
-          color: const Color(0xFFE5E5E5),
+    return GestureDetector(
+      onTap: () {
+        showDialog<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              surfaceTintColor: Colors.white,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SvgPicture.network(
+                    bankImageUrl,
+                    height: 30,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Reklam",
+                        style: TextStyle(
+                          color: Colors.green.shade400,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 12,
+                        width: 12,
+                        child: VerticalDivider(),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Icon(
+                          Icons.close,
+                          size: 16,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(sponsoredOffers.adHeader ?? "Başlık"),
+                    Text(sponsoredOffers.adDetails ?? "İçerik")
+                  ],
+                ),
+              ),
+              actions: <Widget>[
+                SizedBox(
+                  width: double.infinity,
+                  child: TextButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        const Color(0xFF3BB4AB),
+                      ),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
+                      ),
+                      padding: MaterialStateProperty.all(
+                        const EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 16,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {
+                      launchPage(url);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.open_in_new,
+                          size: 18,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          sponsoredOffers.adButtonText ?? "Hemen Başvur!",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color(0xFFffffff),
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          border: Border.all(
+            color: const Color(0xFFE5E5E5),
+          ),
         ),
-      ),
-      padding: const EdgeInsets.all(12),
-      margin: const EdgeInsets.only(left: 12, right: 12, bottom: 12),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SvgPicture.network(
-                bankImageUrl,
-                height: 30,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "Reklam",
-                    style: TextStyle(
-                      color: Colors.green.shade400,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                    width: 12,
-                    child: VerticalDivider(),
-                  ),
-                  const Text(
-                    "Detaylar",
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 2,
-                  ),
-                  const Icon(Icons.arrow_forward_ios, size: 8),
-                ],
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  const Text(
-                    "Aylık Taksit",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                  Text(
-                    "₺$monthlyPayment",
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  const Text(
-                    "Faiz Oranı",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                  Text(
-                    "%${rate.toInt()}",
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  const Text(
-                    "Toplam Tutar",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                  Text(
-                    "₺${amount.toInt()}",
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: TextButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                  const Color(0xFF3BB4AB),
+        padding: const EdgeInsets.all(12),
+        margin: const EdgeInsets.only(left: 12, right: 12, bottom: 12),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SvgPicture.network(
+                  bankImageUrl,
+                  height: 30,
                 ),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Reklam",
+                      style: TextStyle(
+                        color: Colors.green.shade400,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                      width: 12,
+                      child: VerticalDivider(),
+                    ),
+                    const Text(
+                      "Detaylar",
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 2,
+                    ),
+                    const Icon(Icons.arrow_forward_ios, size: 8),
+                  ],
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    const Text(
+                      "Aylık Taksit",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    Text(
+                      "₺$monthlyPayment",
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    const Text(
+                      "Faiz Oranı",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    Text(
+                      "%${rate.toInt()}",
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    const Text(
+                      "Toplam Tutar",
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    Text(
+                      "₺${amount.toInt()}",
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: TextButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(
+                    const Color(0xFF3BB4AB),
+                  ),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 16,
+                    ),
                   ),
                 ),
-                padding: MaterialStateProperty.all(
-                  const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 16,
-                  ),
-                ),
-              ),
-              onPressed: () {
-                launchPage(url);
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.open_in_new,
-                    size: 18,
-                    color: Colors.white,
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    sponsoredOffers.adButtonText ?? "Hemen Başvur!",
-                    style: const TextStyle(
+                onPressed: () {
+                  launchPage(url);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.open_in_new,
+                      size: 18,
                       color: Colors.white,
-                      fontWeight: FontWeight.w500,
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    Text(
+                      sponsoredOffers.adButtonText ?? "Hemen Başvur!",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

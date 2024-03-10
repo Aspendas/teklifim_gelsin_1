@@ -144,7 +144,6 @@ class LoanList extends StatelessWidget {
               adUrl: Uri.parse(
                   "https://at96.tr.adj.st/?adj_t=19dj1ag7_192bvho9&adj_deep_link=finansbankmobile%3A%2F%2F"),
             ),
-
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
