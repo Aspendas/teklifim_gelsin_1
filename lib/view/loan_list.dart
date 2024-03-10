@@ -143,9 +143,7 @@ class LoanList extends StatelessWidget {
               adUrl: Uri.parse(
                   "https://at96.tr.adj.st/?adj_t=19dj1ag7_192bvho9&adj_deep_link=finansbankmobile%3A%2F%2F"),
             ),
-            const SizedBox(
-              height: 12,
-            ),
+
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -158,6 +156,11 @@ class LoanList extends StatelessWidget {
                   activeOffers: offer,
                 );
               },
+            ),
+            OfferAd(
+              adImageUrl:
+                  "https://teklifimgelsin.com/_next/image?url=https%3A%2F%2Fcdn.teklifimgelsin.com%2Fimages%2Fbanners%2Ftg-report-banner-mobile2.webp&w=640&q=75",
+              adUrl: Uri.parse("https://teklifimgelsin.com/kredi-karnesi"),
             ),
           ],
         ),
