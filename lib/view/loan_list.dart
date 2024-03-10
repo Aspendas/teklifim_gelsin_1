@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teklifim_gelsin_1/model/loan.dart';
 import 'package:teklifim_gelsin_1/utils/bank_image.dart';
+import 'package:teklifim_gelsin_1/widgets/offer_ad.dart';
 import 'package:teklifim_gelsin_1/widgets/sponsored_offer.dart';
 
 import '../viewmodel/loan.dart';
@@ -136,6 +137,14 @@ class LoanList extends StatelessWidget {
                 );
               },
             ),
+            // first ad
+            OfferAd(
+              adImageUrl:
+                  "https://teklifimgelsin.com/_next/image?url=https%3A%2F%2Fcdn.teklifimgelsin.com%2Fimages%2Fbanners%2FQNB_30k_720x250.webp&w=3840&q=75",
+              adUrl: Uri.parse(
+                  "https://at96.tr.adj.st/?adj_t=19dj1ag7_192bvho9&adj_deep_link=finansbankmobile%3A%2F%2F"),
+            ),
+            const SizedBox(height: 80),
           ],
         ),
       ),
