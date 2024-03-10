@@ -14,6 +14,7 @@ class SearchLoan extends StatefulWidget {
 class _SearchLoanState extends State<SearchLoan> {
   double _amountSliderValue = 30000;
   double _maturitySliderValue = 12;
+  bool isExceeded = false;
 
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _maturityController = TextEditingController();
@@ -22,6 +23,7 @@ class _SearchLoanState extends State<SearchLoan> {
     final loanViewModel = Provider.of<LoanViewModel>(context);
     _amountController.text = _amountSliderValue.toInt().toString();
     _maturityController.text = _maturitySliderValue.toInt().toString();
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -99,6 +101,10 @@ class _SearchLoanState extends State<SearchLoan> {
                 onChanged: (double value) {
                   setState(() {
                     _amountSliderValue = value;
+                    if (_amountSliderValue > 100000 &&
+                        _maturitySliderValue > 12) {
+                      _maturitySliderValue = 12;
+                    }
                   });
                 },
               ),
@@ -115,7 +121,11 @@ class _SearchLoanState extends State<SearchLoan> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          setState(() {
+                            isExceeded = !isExceeded;
+                          });
+                        },
                         child: const Icon(
                           Icons.info_outline,
                           size: 24,
@@ -177,11 +187,28 @@ class _SearchLoanState extends State<SearchLoan> {
                   divisions: 36,
                   onChanged: (double value) {
                     setState(() {
-                      _maturitySliderValue = value;
+                      if (_amountSliderValue > 100000 && value > 12) {
+                        setState(() {
+                          isExceeded = true;
+                          print(isExceeded);
+                        });
+                      } else if (value > 12 && _amountSliderValue > 100000) {
+                      } else {
+                        _maturitySliderValue = value;
+                      }
                     });
                   },
                 ),
               ),
+              // Warning
+              isExceeded
+                  ? const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "BDDK kararları gereğince 100.000TL ve üzeri krediler için maksimum vade 12 ay ile sınırlandırılmıştır.",
+                      ),
+                    )
+                  : const SizedBox(),
               // Submit Button
               SizedBox(
                 width: double.infinity,
