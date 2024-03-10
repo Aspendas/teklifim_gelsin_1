@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../model/loan.dart';
+import '../utils/launch_page.dart';
 import '../utils/monthly_payment.dart';
 
 class SponsoredOffer extends StatelessWidget {
-  SponsoredOffer(
+  const SponsoredOffer(
       {super.key, required this.bankImageUrl, required this.sponsoredOffers});
   final String bankImageUrl;
   final SponsoredOffers sponsoredOffers;
@@ -18,6 +20,7 @@ class SponsoredOffer extends StatelessWidget {
     double? totalInterestRate = rate * 0.013;
     String monthlyPayment =
         calculeteMonthlyPayment(amount, totalInterestRate, expiry);
+    Uri url = Uri.parse(sponsoredOffers.adUtmLink!);
 
     return Container(
       decoration: BoxDecoration(
@@ -150,7 +153,9 @@ class SponsoredOffer extends StatelessWidget {
                   ),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                launchPage(url);
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
