@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:teklifim_gelsin_1/model/loan.dart';
@@ -8,6 +6,7 @@ import 'package:teklifim_gelsin_1/widgets/offer_ad.dart';
 import 'package:teklifim_gelsin_1/widgets/sponsored_offer.dart';
 
 import '../viewmodel/loan.dart';
+import '../widgets/activeOffer.dart';
 import 'search_loan.dart';
 
 class LoanList extends StatelessWidget {
@@ -144,7 +143,22 @@ class LoanList extends StatelessWidget {
               adUrl: Uri.parse(
                   "https://at96.tr.adj.st/?adj_t=19dj1ag7_192bvho9&adj_deep_link=finansbankmobile%3A%2F%2F"),
             ),
-            const SizedBox(height: 80),
+            const SizedBox(
+              height: 12,
+            ),
+            ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: activeOffers.length,
+              itemBuilder: (context, index) {
+                final offer = activeOffers[index];
+                return ActiveOffer(
+                  bankImageUrl: getBankImage(offer.bankId ?? 0),
+                  loan: loanViewModel.loans.first,
+                  activeOffers: offer,
+                );
+              },
+            ),
           ],
         ),
       ),
